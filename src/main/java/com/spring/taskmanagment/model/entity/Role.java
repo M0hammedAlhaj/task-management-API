@@ -3,11 +3,13 @@ package com.spring.taskmanagment.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority, Serializable {
@@ -31,11 +33,4 @@ public class Role implements GrantedAuthority, Serializable {
     @Column(name = "role_name", unique = true, nullable = false)
     private String roleName;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                '}';
-    }
 }

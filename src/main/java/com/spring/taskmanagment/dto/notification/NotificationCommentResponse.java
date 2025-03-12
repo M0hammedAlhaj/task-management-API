@@ -1,5 +1,8 @@
 package com.spring.taskmanagment.dto.notification;
 
+import lombok.Getter;
+
+@Getter
 public class NotificationCommentResponse implements NotificationResponse {
 
     private Long taskId;
@@ -14,15 +17,4 @@ public class NotificationCommentResponse implements NotificationResponse {
         message = "";
     }
 
-    public Long getTaskId() {
-        return taskId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String  getAuthorEmail() {
-        return authorEmail;
-    }
 }

@@ -4,12 +4,14 @@ import com.spring.taskmanagment.model.TimeLogType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "comments")
 public class Comment implements Serializable {
@@ -58,43 +60,4 @@ public class Comment implements Serializable {
     private Task taskComment;
 
 
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Set<TimeLog> getTimeLogs() {
-        return timeLogs;
-    }
-
-    public void setTimeLogs(Set<TimeLog> timeLogs) {
-        this.timeLogs = timeLogs;
-    }
-
-    public User getUserAuthor() {
-        return userAuthor;
-    }
-
-    public void setUserAuthor(User userAuthor) {
-        this.userAuthor = userAuthor;
-    }
-
-    public Task getTaskComment() {
-        return taskComment;
-    }
-
-    public void setTaskComment(Task taskComment) {
-        this.taskComment = taskComment;
-    }
 }

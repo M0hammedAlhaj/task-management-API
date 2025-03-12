@@ -2,7 +2,9 @@ package com.spring.taskmanagment.dto.notification;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
+@Getter
 public class NotificationAssign implements NotificationResponse {
 
     @NotNull(message = "User receiver ID is required")
@@ -16,11 +18,4 @@ public class NotificationAssign implements NotificationResponse {
         this.message = "A new task has been assigned to you!";
     }
 
-    public Long getUserReceiverId() {
-        return userReceiverId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }

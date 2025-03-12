@@ -1,5 +1,8 @@
 package com.spring.taskmanagment.dto.task;
 
+import lombok.*;
+
+@Data
 public class TaskAssignmentResponse {
 
     private TaskResponse taskResponse;
@@ -8,28 +11,5 @@ public class TaskAssignmentResponse {
 
     private String userOwnerName;
 
-    public TaskResponse getTaskResponse() {
-        return taskResponse;
-    }
 
-    public void setTaskResponse(TaskResponse taskResponse) {
-        this.taskResponse = taskResponse;
-    }
-
-
-    public String getUserAssigmentName() {
-        return userAssigmentName;
-    }
-
-    public void setUserAssigmentName(String userAssigmentName) {
-        this.userAssigmentName = userAssigmentName;
-    }
-
-    public String getUserOwnerName() {
-        return userOwnerName;
-    }
-
-    public void setUserOwnerName(String userOwnerName) {
-        this.userOwnerName = userOwnerName;
-    }
 }
