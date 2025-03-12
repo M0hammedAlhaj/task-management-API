@@ -11,9 +11,11 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Data
 @Entity
 @Table(name = "comments")
+@Builder
 public class Comment implements Serializable {
 
     @Id
@@ -33,6 +35,11 @@ public class Comment implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "time_log_id")
     )
     private Set<TimeLog> timeLogs = new HashSet<>();
+
+    public Comment() {
+
+    }
+
 
     @PrePersist
     protected void onCreate() {

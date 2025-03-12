@@ -49,11 +49,11 @@ public class CommentService {
 
         taskService.validateUserParticipated(task.getTaskId(), userCommentEmail);
 
-        Comment comment = new Comment();
 
-        comment.setContent(commentCreationRequest.getContent());
-        comment.setUserAuthor(user);
-        comment.setTaskComment(task);
+        Comment comment = Comment.builder()
+                .content(commentCreationRequest.getContent())
+                .userAuthor(user)
+                .taskComment(task).build();
 
         comment = commentDao.save(comment);
 
