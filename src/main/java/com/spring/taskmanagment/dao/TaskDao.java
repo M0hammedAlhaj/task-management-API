@@ -1,5 +1,6 @@
 package com.spring.taskmanagment.dao;
 
+import com.spring.taskmanagment.dto.task.TaskResponse;
 import com.spring.taskmanagment.model.TaskStatus;
 import com.spring.taskmanagment.model.entity.Task;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -48,4 +50,12 @@ public interface TaskDao extends JpaRepository<Task, Long> {
     BigDecimal calculateTaskRatByUserEmailAndTaskStatus(@Param("userEmail") String userEmail,
                                                     @Param("taskStatus") TaskStatus taskStatus);
 
+    @Query("SELECT t " +
+            "FROM Task t " +
+            "JOIN t.userAssign us " +
+            "JOIN t.userOwner uo " +
+            "WHERE t.taskName LIKE  %:taskName% " +
+            "AND us.email=:userEmail OR uo.email=:userEmail"
+    )
+    List<Task> findTasksByUserEmailAndLikeTaskName(String taskName, String userEmail);
 }

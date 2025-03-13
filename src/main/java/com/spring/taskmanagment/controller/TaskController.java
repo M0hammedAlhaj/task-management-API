@@ -91,4 +91,11 @@ public class TaskController {
 
         return ResponseEntity.ok(taskAssignmentResponse);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<TaskResponse>> searchTasks(@RequestParam String taskName,
+                                                          @AuthenticationPrincipal UserDetails user) {
+
+        return ResponseEntity.ok(taskService.searchTasksByUserEmailAndTaskName(taskName, user.getUsername()));
+    }
 }

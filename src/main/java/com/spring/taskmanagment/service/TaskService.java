@@ -171,4 +171,12 @@ public class TaskService {
                                                                TaskStatus taskStatus) {
         return taskDao.calculateTaskRatByUserEmailAndTaskStatus(userEmail, taskStatus);
     }
+
+    public List<TaskResponse> searchTasksByUserEmailAndTaskName(String taskName, String userEmail) {
+
+        return taskDao.findTasksByUserEmailAndLikeTaskName(taskName, userEmail)
+                .stream()
+                .map(taskMap::taskToTaskResponse)
+                .toList();
+    }
 }
