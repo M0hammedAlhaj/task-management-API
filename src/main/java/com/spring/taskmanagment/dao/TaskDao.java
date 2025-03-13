@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -37,5 +38,14 @@ public interface TaskDao extends JpaRepository<Task, Long> {
             @Param("userEmail") String userEmail,
             @Param("taskStatus") TaskStatus taskStatus
     );
+
+    @Query("SELECT CASE WHEN COUNT(t) > 0 THEN " +
+            "COUNT(CASE WHEN t.status = :taskStatus THEN 1 END) * 1.0 / COUNT(t) " +
+            "ELSE 0 END " +
+            "FROM Task t " +
+            "JOIN t.userAssign us " +
+            "WHERE us.email = :userEmail")
+    BigDecimal calculateTaskRatByUserEmailAndTaskStatus(@Param("userEmail") String userEmail,
+                                                    @Param("taskStatus") TaskStatus taskStatus);
 
 }

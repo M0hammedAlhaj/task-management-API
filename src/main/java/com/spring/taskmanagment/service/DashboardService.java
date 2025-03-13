@@ -1,8 +1,10 @@
 package com.spring.taskmanagment.service;
 
+import com.spring.taskmanagment.controller.UserController;
 import com.spring.taskmanagment.model.TaskStatus;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -14,12 +16,14 @@ public class DashboardService {
     private final UserService userService;
 
     private final TaskService taskService;
+    private final UserController userController;
 
     public DashboardService(UserService userService,
-                            TaskService taskService) {
+                            TaskService taskService, UserController userController) {
 
         this.userService = userService;
         this.taskService = taskService;
+        this.userController = userController;
     }
 
     public Long countUsersCreatedMonthFromDay() {
@@ -37,5 +41,8 @@ public class DashboardService {
                 userEmail);
     }
 
+    public BigDecimal taskCompletedRatByUserEmail(String userEmail) {
+        return taskService.calculateTaskRatByUserEmailAndTaskStatus(userEmail, TaskStatus.COMPLETED);
+    }
 
 }

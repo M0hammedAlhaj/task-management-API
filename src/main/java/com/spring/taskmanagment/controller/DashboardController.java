@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 @RestController
@@ -47,6 +48,11 @@ public class DashboardController {
                         findTaskCountsPerUserAssignByOwnerEmailAndStatusNotCompleted
                                 (userDetails.getUsername())
                 );
+    }
+
+    @GetMapping("/tasks/completion-rate")
+    public BigDecimal getTaskCompletionRateByUserEmail(@RequestParam("email") String userEmail) {
+        return dashboardService.taskCompletedRatByUserEmail(userEmail);
     }
 
 }

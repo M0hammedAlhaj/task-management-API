@@ -20,6 +20,7 @@ import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -164,5 +165,10 @@ public class TaskService {
     public HashMap<Long, Long> findTaskCountsPerUserAssignByOwnerEmailAndStatusNot(TaskStatus taskStatus, String userEmail) {
         return taskDao.findTaskCountsPerUserAssignByOwnerEmailAndStatusNot(userEmail, taskStatus)
                 .orElseThrow(() -> new ResourceNotFoundException("Users dont have tasks "));
+    }
+
+    public BigDecimal calculateTaskRatByUserEmailAndTaskStatus(String userEmail,
+                                                               TaskStatus taskStatus) {
+        return taskDao.calculateTaskRatByUserEmailAndTaskStatus(userEmail, taskStatus);
     }
 }
