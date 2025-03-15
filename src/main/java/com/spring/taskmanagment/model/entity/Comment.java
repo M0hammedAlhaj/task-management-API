@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "comments")
 @Builder
+@AllArgsConstructor
 public class Comment implements Serializable {
 
     @Id
