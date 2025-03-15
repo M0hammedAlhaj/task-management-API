@@ -3,6 +3,7 @@ package com.spring.taskmanagment.dao;
 
 import com.spring.taskmanagment.model.TaskPriority;
 import com.spring.taskmanagment.model.entity.Task;
+import com.spring.taskmanagment.model.entity.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,7 @@ public class TaskDaoTests {
     @Test
     public void TaskDao_FindById_returnTask() {
 
-        Task task = new Task();
-        task.setTaskName("Add unit test to project");
-        task.setPriority(TaskPriority.HIGH);
-        task.setDueDate(LocalDate.of(2025, 11, 1));
-        Task savedTask = taskDao.save(task);
+        Task savedTask = taskDao.save(createTask());
 
         Long taskId = savedTask.getTaskId();
 
@@ -52,16 +49,29 @@ public class TaskDaoTests {
     @Test
     public void TaskDao_Delete() {
 
-        Task task = new Task();
-        task.setTaskName("Add unit test to project");
-        task.setPriority(TaskPriority.HIGH);
-        task.setDueDate(LocalDate.of(2025, 11, 1));
 
-        Task savedTask = taskDao.save(task);
+        Task savedTask = taskDao.save(createTask());
 
         taskDao.delete(savedTask);
 
         Assertions.assertThatNoException().isThrownBy(() -> taskDao.findById(savedTask.getTaskId()));
+    }
+
+    @Test
+    public void TaskDao_FindAllTasks() {
+
+    }
+
+    private Task createTask() {
+        return Task.builder()
+                .taskName("Task")
+                .priority(TaskPriority.HIGH)
+                .dueDate(LocalDate.of(2025, 11, 1))
+                .userAssign(User.builder()
+                        .userName("Mohammed")
+                        .email("mohamddd@Gmail.com")
+                        .password("211452").build())
+                .build();
 
     }
 

@@ -7,7 +7,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,6 +22,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tasks")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Task implements Serializable {
 
     @Id
@@ -67,6 +72,7 @@ public class Task implements Serializable {
 
     @PrePersist
     protected void onCreate() {
+        timeLogs = timeLogs == null ? new HashSet<>() : timeLogs;
         TimeLog timeLog = new TimeLog();
         timeLog.setType(TimeLogType.CREATE);
         timeLog.setDate(LocalDateTime.now());
